@@ -1,5 +1,5 @@
 
-- All four built-in algorithms: Fixed Window, Sliding Window, Token Bucket, Concurrency Limiter
+
 - Production-grade `OnRejected` returning RFC 9457 ProblemDetails + `Retry-After` header
 - Multi-tenant tier resolution (Free / Pro / Enterprise) partitioned by `X-API-Key`
 - Optional Redis backplane for multi-instance enforcement (off by default)
@@ -43,7 +43,7 @@ retry-after: 58
 ```
 
 ## More testing commands you can change the free-key-001 to pro-key-02 to increase rate limit
-
+```
 for i in {1..70}; do
   curl -i -H "X-API-Key: free-key-001" http://localhost:5000/api/login \
   --request POST \
@@ -53,20 +53,22 @@ for i in {1..70}; do
   "password": ""
 }'
 done
-
-
+```
+```
 for i in {1..70}; do
   curl -i -H "X-API-Key: free-key-001" http://localhost:5000/api/pricing
 done
-
+```
+```
 for i in {1..70}; do
   curl -i -H "X-API-Key: free-key-001" curl http://localhost:5000/health
 done
-
+```
+```
 for i in {1..70}; do
   curl -i -H "X-API-Key: free-key-001" curl http://localhost:5000/api/internal/health
 done
-
+```
 
 
 
