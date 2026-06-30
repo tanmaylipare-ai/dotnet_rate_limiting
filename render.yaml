@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: rate-limiting-aspnet-core
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: RateLimiting__EnableRedisBackplane
+        value: "false"
+      - key: RateLimiting__Redis
+        value: localhost:6379
+    autoDeploy: true

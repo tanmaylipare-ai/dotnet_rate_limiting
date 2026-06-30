@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using RedisRateLimiting.AspNetCore;
 using Scalar.AspNetCore;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.HttpOverrides;
 
 static string ResolveClient(HttpContext httpContext)
 {
@@ -212,6 +213,15 @@ builder.Services.AddRateLimiter(options =>
 });
 
 var app = builder.Build();
+var forwardedHeaderOptions = new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+};
+forwardedHeaderOptions.KnownNetworks.Clear();
+forwardedHeaderOptions.KnownProxies.Clear();
+app.UseForwardedHeaders(forwardedHeaderOptions);
+
+app.UseRouting();
 
 app.UseRouting();
 app.UseRateLimiter();
