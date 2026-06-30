@@ -5,14 +5,22 @@
 - Optional Redis backplane for multi-instance enforcement (off by default)
 - `[DisableRateLimiting]` for health endpoints
 
-## Run it
+## Run it locally
 
 ```bash
 cd RateLimiting.Api
 dotnet run
 ```
+Open Scalar at `https://localhost:5000/scalar/v1` to explore the endpoints.
 
-Open Scalar at `https://localhost:5xxx/scalar/v1` to explore the endpoints.
+## Run it on docker (if setup is done)
+```bash
+cd rate-limiting-aspnet-core
+docker compose up --build
+```
+Open Scalar at `https://localhost:8080/scalar/v1` to explore the endpoints.
+
+
 
 ## Try the rate limiter
 
